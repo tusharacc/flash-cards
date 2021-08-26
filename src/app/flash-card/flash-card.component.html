@@ -1,60 +1,58 @@
 <div class="container">
-    <div class="toolbar">
-        <button mat-raised-button color="primary" (click)="toggleLatexEditor()">LATEX</button>
-        <button mat-raised-button color="accent" (click)="toggleCodeEditor()">CODE</button>
-        <button mat-raised-button color="warn" (click)="downloadFlashCard()">DOWNLOAD</button>
-    </div>
-    <div class="flash-body"  #flashcard>
-        <div class="header">
-            <h3>
-                <form>
-                    <mat-form-field appearance="fill" style="width:50%">
-                      <mat-label>Flash Card Header</mat-label>
-                      <input matInput  placeholder="Enter Flash Card header" [(ngModel)]="header">
-                    </mat-form-field>
-                  </form>
-                  
-                  
-            </h3>
-        </div>
-        <div class="body" style="width: 100%;">
-            <form class="example-form" style="width: 100%;">
-                <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
-                  <textarea matInput placeholder="Here goes the details..." rows="8"></textarea>
-                </mat-form-field>
-              </form>
-              <div class="latex" *ngIf="showLatex">
-                <div class="user-input">
-                  <textarea name="" id="" cols="30" rows="8" (keydown.enter)="onPressingEnter()" [(ngModel)]="userEntry"></textarea>
-                </div>
-                <div class="formatted">
-                  <div [innerHtml]="html"></div>
-                </div>
-              </div>
-              <div class="code" *ngIf="showCodeEditor">
-                <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
-              </div>
-        </div>
-        
-        
-        <div class="tags">
-          <mat-form-field class="chip-list" appearance="fill">
-            <mat-label>Flash Card Tags</mat-label>
-            <mat-chip-list #chipList aria-label="Tag">
-              <mat-chip *ngFor="let tag of tags" [selectable]="selectable"
-                       [removable]="removable" (removed)="remove(tag)">
-                {{tag.name}}
-                <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
-              </mat-chip>
-              <input placeholder="New Tag..."
-                     [matChipInputFor]="chipList"
-                     [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
-                     [matChipInputAddOnBlur]="addOnBlur"
-                     (matChipInputTokenEnd)="add($event)">
-            </mat-chip-list>
+  <div class="toolbar">
+    <button mat-raised-button color="primary" (click)="toggleLatexEditor()">LATEX</button>
+    <button mat-raised-button color="accent" (click)="toggleCodeEditor()">CODE</button>
+    <button mat-raised-button color="warn" (click)="downloadFlashCard()">DOWNLOAD</button>
+  </div>
+  <div class="flash-body" #flashcard>
+    <div class="header">
+      <h3>
+        <form>
+          <mat-form-field appearance="fill" style="width:50%">
+            <mat-label>Flash Card Header</mat-label>
+            <input matInput placeholder="Enter Flash Card header" [(ngModel)]="header">
           </mat-form-field>
-        </div>
+        </form>
+
+
+      </h3>
     </div>
+    <div class="body" style="width: 100%;">
+      <form class="example-form" style="width: 100%;">
+        <mat-form-field class="example-full-width" appearance="fill" style="width: 100%;">
+          <textarea matInput placeholder="Here goes the details..." rows="8"></textarea>
+        </mat-form-field>
+      </form>
+      <div class="latex" *ngIf="showLatex">
+        <div class="user-input">
+          <textarea name="" id="" cols="30" rows="8" (keydown.enter)="onPressingEnter()"
+            [(ngModel)]="userEntry"></textarea>
+        </div>
+        <div class="formatted">
+          <div [innerHtml]="html"></div>
+        </div>
+      </div>
+      <div class="code" *ngIf="showCodeEditor">
+        <ngx-monaco-editor [options]="editorOptions" [(ngModel)]="code"></ngx-monaco-editor>
+      </div>
+    </div>
+
+
+    <div class="tags">
+      <mat-form-field class="chip-list" appearance="fill">
+        <mat-label>Flash Card Tags</mat-label>
+        <mat-chip-list #chipList aria-label="Tag">
+          <mat-chip *ngFor="let tag of tags" [selectable]="selectable" [removable]="removable" (removed)="remove(tag)">
+            {{tag.name}}
+            <mat-icon matChipRemove *ngIf="removable">cancel</mat-icon>
+          </mat-chip>
+          <input placeholder="New Tag..." [matChipInputFor]="chipList"
+            [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+            (matChipInputTokenEnd)="add($event)">
+        </mat-chip-list>
+      </mat-form-field>
+    </div>
+  </div>
 </div>
 <div id="download">
   <img #canvas>
